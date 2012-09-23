@@ -1,0 +1,25 @@
+name: EtriaShop
+main: com.etriacraft.EtriaShop.Main
+version: 1.0
+author: MistPhizzle
+description: Custom Shop plugin for the EtriaCraft server.
+commands:
+  shop:
+    description: EtriaShop main command.
+    aliases:
+      - es
+      - etriashop
+permissions:
+  etriashop.break:
+    default: op
+    description: Allows moderators to break other people's signs and chests
+  etriashop.atm:
+    default: op
+    description: Allows player to create ATMs.
+  etriashop.nofee:
+    default: op
+    description: Bypass the shop creation fee.
+  etriashop.reload:
+    default: op
+    description: Reload EtriaShop
+depend: [Lockette, Vault]
