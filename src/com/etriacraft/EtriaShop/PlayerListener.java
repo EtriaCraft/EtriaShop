@@ -290,13 +290,20 @@ if (!Lockette.isProtected(block) || Lockette.isOwner(block, event.getPlayer().ge
                         if (Config.fee == 0) hasEnough = true;
                         else if (Econ.handler.has(event.getPlayer().getName(), Config.fee)) hasEnough = true;
                         
-                        if (hasEnough) {
+                        if (hasEnough && event.getPlayer().hasPermission("etriashop.nofee")) {
                             if (s.linkChest((Chest)event.getClickedBlock().getState(), event.getPlayer().getName())) {
-                                Econ.handler.withdrawPlayer(event.getPlayer().getName(), Config.fee);
-                                Econ.handler.depositPlayer(Config.fee_account, Config.fee);
-                                event.getPlayer().sendMessage(Main.PREFIX + "You've successfully linked this chest to a shop, and paid the§6 " + Econ.handler.format(Config.fee) + " §7fee!");
+                                event.getPlayer().sendMessage(Main.PREFIX + "You've successfully linked this chest to a shop, you were also exempt from the fee!");
                                 s.recheck();
                                 selected.remove(event.getPlayer());
+                            }
+                            } else if (hasEnough) {
+                            	if (s.linkChest((Chest)event.getClickedBlock().getState(), event.getPlayer().getName())) {
+	                            	Econ.handler.withdrawPlayer(event.getPlayer().getName(), Config.fee);
+	                                Econ.handler.depositPlayer(Config.fee_account, Config.fee);
+	                                event.getPlayer().sendMessage(Main.PREFIX + "You've successfully linked this chest to a shop, and paid the§6 " + Econ.handler.format(Config.fee) + " §7fee!");
+	                                s.recheck();
+	                                selected.remove(event.getPlayer());
+                            	}
                             } else {
                                 event.getPlayer().sendMessage(Main.PREFIX + "There was an error in linking your chest. Please make sure you've set an item for the sign you're trying to link, and that this chest is not already linked by someone else.");
                             }
@@ -311,7 +318,6 @@ event.getPlayer().sendMessage(Main.PREFIX + "You can't link to a private chest t
                 }
             }
         }
-    }
     
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
