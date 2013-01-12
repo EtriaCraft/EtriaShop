@@ -22,4 +22,4 @@ permissions:
   etriashop.reload:
     default: op
     description: Reload EtriaShop
-depend: [Lockette, Vault]
+depend: [Vault]
