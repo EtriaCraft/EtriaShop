@@ -36,7 +36,6 @@ Connection.disable();
     public void onEnable() {
         signs = new HashMap<Location, ShopSign>();
         material_names = new HashMap<Pair<Integer, Integer>, String>();
-        PREFIX = "§7[§9" + this.getDescription().getName() + "§7] ";
         
         playerListener = new PlayerListener(this);
         blockListener = new BlockListener(this, playerListener);
@@ -59,7 +58,6 @@ Connection.disable();
         loadSigns();
         populateNames();
         
-        log.info(PREFIX + "version v" + this.getDescription().getVersion() + " is enabled.");
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
